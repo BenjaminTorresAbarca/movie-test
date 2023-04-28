@@ -2,14 +2,14 @@ import sqlite3
 import configparser
 
 
-class Db2Connection(object):
+class SqliteConnection(object):
 
     def __init__(self):
         self._create_conn()
 
     def _create_conn(self):
         config = configparser.ConfigParser()
-        config.read('../../config.ini')
+        config.read('./config.ini')
         self.conn = sqlite3.connect(config['database']['database'])
         self.cursor = self.conn.cursor()
 
