@@ -3,16 +3,16 @@ from resources.resource_base import ResourceBase
 from movie_driver_db.adapter.movies import MoviesAdapter
 
 
-class GetAllMoviesAPI(ResourceBase):
+class GetAllMoviesActiveAPI(ResourceBase):
     decorators = [auth.login_required]
 
     def __init__(self):
-        super(GetAllMoviesAPI, self).__init__()
+        super(GetAllMoviesActiveAPI, self).__init__()
 
     def get(self):
         try:
             functions = MoviesAdapter()
-            rows = functions.list()
+            rows = functions.list_active()
             return rows
 
         except Exception as e:

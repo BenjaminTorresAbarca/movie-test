@@ -1,1 +1,4 @@
 flask
+flask_restful
+flask_cors
+flask_httpauth
