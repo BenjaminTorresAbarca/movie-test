@@ -4,6 +4,7 @@ from flask_cors import CORS
 from resources.movie.get_all import GetAllMoviesAPI
 from resources.movie.get_one import GetOneMovieAPI
 from resources.movie.get_all_active import GetAllMoviesActiveAPI
+from resources.movie.new import NewMovieAPI
 
 
 app = Flask(__name__, static_url_path="")
@@ -31,7 +32,11 @@ api.add_resource(
     endpoint='get_movie'
 )
 
-
+api.add_resource(
+    NewMovieAPI,
+    '/movies',
+    endpoint='new_movie'
+)
 
 if __name__ == "__main__":
     app.run(debug=False, port=5050)
