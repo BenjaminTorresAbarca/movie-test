@@ -1,4 +1,5 @@
 from movie_driver_db.sqlite.SqliteConnection import SqliteConnection
+from movie_driver_db.adapter.movies import MoviesAdapter
 
 
 class ReviewsAdapter(object):
@@ -24,11 +25,26 @@ class ReviewsAdapter(object):
                 "movie_id"] is None or review_data["comment_by"] is None :
             return "Information missing"
         connection = SqliteConnection()
-
         sentence_insert = "INSERT INTO REVIEWS (rate, opinion, movie_id, comment_by) VALUES ('" + str(
             review_data["rate"]) + "','" + str(review_data["opinion"]) + "','" + str(
             review_data["movie_id"]) + "','" + str(review_data["comment_by"]) + "')"
         connection.execute(sentence_insert)
         connection.commit()
+        self.update_rating(review_data["movie_id"])
         connection.close_connection()
-        return "Movie was created"
+        return "Review was created"
+
+    def update_rating(self, movie_id):
+        functions_movie = MoviesAdapter()
+        reviews = self.list(movie_id)
+        total_reviews = len(reviews)
+        total = 0
+        for review in reviews:
+            total = total + float(review["rate"])
+        ratio = total / total_reviews
+        update_rating = {
+            "movie_id": movie_id,
+            "rating": ratio
+        }
+        functions_movie.update_rating(update_rating)
+

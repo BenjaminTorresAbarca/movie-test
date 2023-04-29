@@ -81,3 +81,11 @@ class MoviesAdapter(object):
             connection.commit()
             connection.close_connection()
             return "Movie was created"
+
+    def update_rating(self, rating_dict):
+        connection = SqliteConnection()
+        sentence = "UPDATE MOVIES SET rating = '" + str(rating_dict["rating"]) + "' WHERE ID = '" + str(
+            rating_dict["movie_id"]) + "'"
+        connection.execute(sentence)
+        connection.commit()
+        connection.close_connection()

@@ -3,11 +3,11 @@ from resources.resource_base import ResourceBase
 from movie_driver_db.adapter.reviews import ReviewsAdapter
 
 
-class GetAllMoviesAPI(ResourceBase):
+class GetAllReviewsAPI(ResourceBase):
     decorators = [auth.login_required]
 
     def __init__(self):
-        super(GetAllMoviesAPI, self).__init__()
+        super(GetAllReviewsAPI, self).__init__()
 
     def get(self, movie_id):
         try:
