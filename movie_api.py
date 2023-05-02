@@ -3,10 +3,12 @@ from flask_restful import Api
 from flask_cors import CORS
 from resources.movie.get_all import GetAllMoviesAPI
 from resources.movie.get_one import GetOneMovieAPI
+from resources.movie.delete import DeleteMovieAPI
 from resources.movie.get_all_active import GetAllMoviesActiveAPI
 from resources.movie.new import NewMovieAPI
 from resources.reviews.get_all import GetAllReviewsAPI
 from resources.reviews.new import NewReviewAPI
+
 
 
 app = Flask(__name__, static_url_path="")
@@ -27,11 +29,16 @@ api.add_resource(
     endpoint='get_all_movies_active'
 )
 
-
 api.add_resource(
     GetOneMovieAPI,
     '/movies/<int:id>',
     endpoint='get_movie'
+)
+
+api.add_resource(
+    DeleteMovieAPI,
+    '/movies/<int:id>',
+    endpoint='delete_movie'
 )
 
 api.add_resource(

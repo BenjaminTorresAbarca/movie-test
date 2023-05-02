@@ -2,3 +2,8 @@ flask
 flask_restful
 flask_cors
 flask_httpauth
+flask_swagger
+flask-restful
+pytest
+selenium
+requests

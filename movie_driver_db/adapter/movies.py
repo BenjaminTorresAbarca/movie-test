@@ -89,3 +89,15 @@ class MoviesAdapter(object):
         connection.execute(sentence)
         connection.commit()
         connection.close_connection()
+
+    def delete(self, id):
+        connection = SqliteConnection()
+        sentence = "SELECT * FROM MOVIES WHERE ID = '" + str(id) + "';"
+        row = connection.get_one(sentence)
+        if row:
+            sentence = "DELETE FROM MOVIES WHERE ID = '" + str(id) + "';"
+            connection.execute(sentence)
+            return "Movie was deleted"
+        else:
+            connection.close_connection()
+            return "This movie does not exist"

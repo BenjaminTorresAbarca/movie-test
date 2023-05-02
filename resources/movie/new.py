@@ -1,4 +1,5 @@
 from common.auth import auth
+from flask import jsonify, make_response
 from resources.resource_base import ResourceBase
 from movie_driver_db.adapter.movies import MoviesAdapter
 from flask import request
@@ -17,7 +18,7 @@ class NewMovieAPI(ResourceBase):
             data = request.data.decode()
             json_data = json.loads(data)
             json_data["method"] = "post"
-            return functions.new(json_data)
+            return make_response(jsonify(functions.new(json_data)), 201)
 
         except Exception as e:
             return self.handle_error(e)

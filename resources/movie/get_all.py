@@ -1,6 +1,7 @@
 from common.auth import auth
 from resources.resource_base import ResourceBase
 from movie_driver_db.adapter.movies import MoviesAdapter
+from flask import jsonify, make_response
 
 
 class GetAllMoviesAPI(ResourceBase):
@@ -13,7 +14,7 @@ class GetAllMoviesAPI(ResourceBase):
         try:
             functions = MoviesAdapter()
             rows = functions.list()
-            return rows
+            return make_response(jsonify(rows), 200)
 
         except Exception as e:
             return self.handle_error(e)
